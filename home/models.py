@@ -6,6 +6,60 @@ from django.contrib.auth import get_user_model
 
 # Create your models here
 
+class Profile(models.Model):
+    FICTION = 'FC'
+    ENGINEERING = 'ER'
+    SCIENCE = 'SC'
+    MANAGEMENT = 'MG'
+    LITERATURE = 'LT'
+    ARTS = 'AR'
+    SCHOOL = 'SC'
+    RELIGION = 'RG'
+    ENTRANCE = 'ET'
+    GOVERNMENT = 'GR'
+    MISC = 'MI'
+    LAW = 'LA'
+    CATEGORY_CHOICES = [
+        (FICTION, 'fiction'),
+        (ENGINEERING, 'Engineering'),
+        (SCIENCE, 'Science'),
+        (MANAGEMENT, 'Managemetn'),
+        (LITERATURE, 'Literature'),
+        (ARTS, 'Arts'),
+        (SCHOOL, 'School Level'),
+        (RELIGION, 'Religion'),
+        (LAW, 'Law'),
+        (ENTRANCE, 'Entrance Preparation'),
+        (GOVERNMENT,'Government Jobs'),
+        (MISC, 'Miscelleneous'),
+    ]
+
+    INDIVIDUAL_SELLER = 'IS'
+    WHOLESELLER = 'WS'
+    OTHER = 'OT'
+    CATEGORY_SELLER = [
+        (INDIVIDUAL_SELLER, 'Individual Seller'),
+        (WHOLESELLER, 'Wholeseller'),
+        (OTHER, 'Other'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contact_no = models.CharField(max_length=15)
+    profession = models.CharField(max_length=100)
+    interest = models.CharField(choices=CATEGORY_CHOICES,default=MISC,max_length=100)
+    profile_image = models.ImageField(upload_to='media')
+    user_type = models.CharField(choices=CATEGORY_SELLER,default=INDIVIDUAL_SELLER,max_length=100)
+    rating = models.CharField(max_length=50)
+    pradesh = models.CharField(max_length=50)
+    district = models.CharField(max_length=50)
+    palika = models.CharField(max_length=50)
+    ward_no = models.IntegerField()
+    local_add = models.CharField(max_length=50)
+
+
+
+
+
 class Product(models.Model):
     FICTION = 'FC'
     ENGINEERING = 'ER'
